@@ -25,12 +25,15 @@ class Encrypt
             mkdir(self::KEYS_FOLDER);
         }
 
-        if(file_exists(self::KEYS_FOLDER . '/' . $publicFile) || file_exists(self::KEYS_FOLDER . '/' . $privateFile)){
+        $publicFile = self::KEYS_FOLDER . '/' . $publicFile;
+        $privateFile = self::KEYS_FOLDER . '/' . $privateFile;
+
+        if(file_exists($publicFile) || file_exists($privateFile)){
             return 'ERROR: Public or Private file already exists in "' . self::KEYS_FOLDER . '" folder.';
         }
 
-        file_put_contents(self::KEYS_FOLDER . '/' . $publicFile, $publicKey);
-        file_put_contents(self::KEYS_FOLDER . '/' . $privateFile, $privateKey);
+        file_put_contents($publicFile, $publicKey);
+        file_put_contents($privateFile, $privateKey);
 
         return 'Both keys have been generated and saved in "' . self::KEYS_FOLDER . '" folder.';
     }
