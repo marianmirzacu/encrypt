@@ -17,7 +17,7 @@ class Encrypt
 
     public function generateKeys($publicFile = 'public.key', $privateFile = 'private.key')
     {
-	    openssl_pkey_export($this->resource, $privateKey);
+        openssl_pkey_export($this->resource, $privateKey);
 
         $publicKey = openssl_pkey_get_details($this->resource)["key"];
 
