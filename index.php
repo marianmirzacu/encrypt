@@ -1,6 +1,6 @@
 <?php
 
-include 'Encrypt.php';
+require 'Encrypt.php';
 
 $enc = new Encrypt();
 
