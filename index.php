@@ -9,8 +9,8 @@ $enc = new Encrypt();
  * the public / private keys in the "keys" folder.
  */
 
-$enc->encrypt('Test123 - 321Test');
+$encryptedString = $enc->encrypt('Test123 - 321Test');
 
-echo '<br><br><br><br>';
+echo $encryptedString . PHP_EOL;
 
-echo $enc->decrypt('g0qtsQ3EKxVkuKdOeAKWZjY=');
+echo $enc->decrypt($encryptedString) . PHP_EOL;
