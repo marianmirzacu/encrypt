@@ -9,8 +9,8 @@ $enc = new Encrypt();
  * the public / private keys in the "keys" folder.
  */
 
-var_dump($enc->encryptLongString('Test123 - 321Test'));
+$enc->encrypt('Test123 - 321Test');
 
 echo '<br><br><br><br>';
 
-//echo $enc->decrypt('g0qtsQ3EKxVkuKdOeAKWZjY=');
+echo $enc->decrypt('g0qtsQ3EKxVkuKdOeAKWZjY=');
