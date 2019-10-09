@@ -51,4 +51,43 @@ class Encrypt
 
         return $result;
     }
+
+    public function encryptLongString($text, $publicFile = 'public.key')
+    {
+        $env_keys = [];
+
+        $fp = fopen("keys/" . $publicFile, "r");
+        $cert = fread($fp, 8192);
+        fclose($fp);
+        $publicKey = openssl_get_publickey($cert);
+        $iv = openssl_random_pseudo_bytes(32);
+
+        openssl_seal($text, $sealed, $env_keys, [$publicKey], 'AES256', $iv);
+
+        openssl_free_key($publicKey);
+
+        return [
+            'sealed' => base64_encode($sealed),
+            'env_key' => base64_encode($env_keys[0]),
+            'id' => base64_encode($iv),
+        ];
+    }
+
+    public function decryptLongString($text, $env_key, $privateFile = 'private.key')
+    {
+        $fp = fopen("keys/" . $privateFile, "r");
+        $cert = fread($fp, 8192);
+        fclose($fp);
+        $privateKey = openssl_get_privatekey($certc);
+
+        if (openssl_open(base64_decode($text), $open, base64_decode($env_key), $privateKey)) {
+            openssl_free_key($privateKey);
+
+            return $open;
+        }
+
+        openssl_free_key($privateKey);
+
+        return '-';
+    }
 }
